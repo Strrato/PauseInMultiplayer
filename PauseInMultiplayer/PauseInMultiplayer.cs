@@ -546,13 +546,16 @@ namespace PauseInMultiplayer
                         farmerLocations.Add(f.currentLocation);
                     foreach (GameLocation l in farmerLocations)
                     {
-                        foreach (Character c in l.characters)
+                        if (l.characters != null)
                         {
-                            if (c is StardewValley.Monsters.Monster)
+                            foreach (Character c in l.characters)
                             {
-                                if (!monsterLocks.ContainsKey(c as StardewValley.Monsters.Monster))
-                                    monsterLocks.Add(c as StardewValley.Monsters.Monster, c.Position);
-                                c.Position = monsterLocks[c as StardewValley.Monsters.Monster];
+                                if (c is StardewValley.Monsters.Monster)
+                                {
+                                    if (!monsterLocks.ContainsKey(c as StardewValley.Monsters.Monster))
+                                        monsterLocks.Add(c as StardewValley.Monsters.Monster, c.Position);
+                                    c.Position = monsterLocks[c as StardewValley.Monsters.Monster];
+                                }
                             }
                         }
                     }
